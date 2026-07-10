@@ -4,7 +4,9 @@ codeunit 50100 "PMIS Event Subscribers"
     local procedure "Shpfy Order Events_OnBeforeCreateItemSalesLine"(ShopifyOrderHeader: Record "Shpfy Order Header"; ShopifyOrderLine: Record "Shpfy Order Line"; SalesHeader: Record "Sales Header"; var SalesLine: Record "Sales Line"; var Handled: Boolean)
     var
         Item: Record Item;
-        Shop: Record "Shpfy Shop";
+        ShopifyShop: Record "Shpfy Shop";
+        ShopifyProduct: Record "Shpfy Product";
+        ShopifyVariant: Record "Shpfy Variant";
     begin
         if ShopifyOrderLine."Item No." = '' then
             exit;
@@ -12,29 +14,16 @@ codeunit 50100 "PMIS Event Subscribers"
         if Item.Get(ShopifyOrderLine."Item No.") then
             exit;
 
-        Shop.Get(ShopifyOrderHeader."Shop Code");
-        CreateItemFromTemplate(Item, Shop."Item Templ. Code", ShopifyOrderLine."Item No.", ShopifyOrderLine.Description);
-    end;
-
-    procedure CreateItemFromTemplate(var Item: Record Item; ItemTemplCode: Code[20]; ItemNo: Code[20]; ItemDescription: Text)
-    var
-        ItemTempl: Record "Item Templ.";
-        ItemTemplMgt: Codeunit "Item Templ. Mgt.";
-    begin
-        if not ItemTempl.Get(ItemTemplCode) then
+        if not ShopifyVariant.Get(ShopifyOrderLine."Shopify Variant Id") then
             exit;
 
-        Item.Init();
-        Item."No." := ItemNo;
-        Item.Insert(true);
-
-        ItemTemplMgt.ApplyItemTemplate(Item, ItemTempl, true);
-
-        Item.Description := CopyStr(ItemDescription, 1,
-                MaxStrLen(Item.Description));
-
-        Item.Modify(true);
-
+        if not ShopifyProduct.Get(ShopifyVariant."Product Id") then
+            exit;
+        ShopifyShop.Get(ShopifyOrderHeader."Shop Code");
+        PMISFunctions.SetShop(ShopifyShop);
+        PMISFunctions.DoCreateItem(ShopifyProduct, ShopifyVariant, Item, true);
     end;
 
+    var
+        PMISFunctions: Codeunit "PMIS Functions";
 }
