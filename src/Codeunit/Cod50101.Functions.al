@@ -266,4 +266,10 @@ codeunit 50101 "PMIS Functions"
     begin
         exit(CleanFilterValue(CopyStr(Value, 1, MaxLength)));
     end;
+
+    procedure SetShop(ShopifyShop: Record "Shpfy Shop")
+    begin
+        Shop := ShopifyShop;
+        TemplateCode := Shop."Item Templ. Code";
+    end;
 }
