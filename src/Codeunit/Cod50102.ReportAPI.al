@@ -1,7 +1,7 @@
 codeunit 50102 "PMIS Report API"
 {
     [ServiceEnabled]
-    procedure GetPSIPDF(documentNo: Code[20]): Text
+    procedure GetPSIPDF(orderNo: Code[20]): Text
     var
         SalesInvHeader: Record "Sales Invoice Header";
         TempBlob: Codeunit "Temp Blob";
@@ -10,7 +10,7 @@ codeunit 50102 "PMIS Report API"
         InStr: InStream;
         RecRef: RecordRef;
     begin
-        SalesInvHeader.SetRange("No.", documentNo);
+        SalesInvHeader.SetRange("Order No.", orderNo);
 
         if not SalesInvHeader.FindFirst() then
             exit;
