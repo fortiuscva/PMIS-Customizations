@@ -30,4 +30,16 @@ codeunit 50100 "PMIS Event Subscribers"
             SalesLineRec.Insert();
         end;
     end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Order Events", 'OnAfterCreateSalesHeader', '', false, false)]
+    local procedure OnAfterCreateSalesHeader(var SalesHeader: Record "Sales Header"; OrderHeader: Record "Shpfy Order Header")
+    var
+        ShopifyShop: Record "Shpfy Shop";
+    begin
+        ShopifyShop.Get(OrderHeader."Shop Code");
+        if SalesHeader."Ship-to Phone No." = '' then begin
+            SalesHeader.Validate("Ship-to Phone No.", SalesHeader."Sell-to Phone No.");
+            SalesHeader.Modify();
+        end;
+    end;
 }
