@@ -1,5 +1,19 @@
 codeunit 50100 "PMIS Event Subscribers"
 {
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Order Events", OnAfterCreateItemSalesLine, '', false, false)]
+    local procedure "Shpfy Order Events_OnAfterCreateItemSalesLine"(ShopifyOrderHeader: Record "Shpfy Order Header"; ShopifyOrderLine: Record "Shpfy Order Line"; SalesHeader: Record "Sales Header"; var SalesLine: Record "Sales Line")
+    begin
+        SalesAndReceivablesSetup.Get();
+        SalesLine.Reset();
+        SalesLine.SetRange("Shpfy Order Line Id", ShopifyOrderLine."Line Id");
+        if SalesLine.FindFirst() then
+            if SalesLine.Type = SalesLine.Type::Item then
+                if SalesLine."No." = SalesAndReceivablesSetup."PMIS Default Custom Item" then begin
+                    SalesLine.Description := ShopifyOrderLine.Description;
+                    SalesLine.Modify();
+                end;
+    end;
+
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Order Events", 'OnAfterCreateItemSalesLine', '', false, false)]
     local procedure AddTaxLineToSalesOrder(ShopifyOrderHeader: Record "Shpfy Order Header"; SalesHeader: Record "Sales Header"; var SalesLine: Record "Sales Line")
     var
@@ -51,7 +65,6 @@ codeunit 50100 "PMIS Event Subscribers"
     begin
         if RefundLine."Item No." = '' then
             exit;
-
         Shop.Get(RefundHeader."Shop Code");
 
         SalesLine.Reset();
@@ -111,7 +124,6 @@ codeunit 50100 "PMIS Event Subscribers"
 
         SalesLine."Shpfy Refund Id" := RefundHeader."Refund Id";
         SalesLine."Shpfy Refund Line Id" := RefundLine."Refund Line Id";
-
         SalesLine.Modify(true);
 
         Handled := true;
@@ -123,6 +135,38 @@ codeunit 50100 "PMIS Event Subscribers"
         PMISFunctions.DeleteSalesOrder(RefundHeader);
     end;
 
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Order Events", OnAfterCreateShopifyOrderAndLines, '', false, false)]
+    local procedure "Shpfy Order Events_OnAfterCreateShopifyOrderAndLines"(var ShopifyOrderHeader: Record "Shpfy Order Header"; IsNew: Boolean)
+    var
+        ShopifyOrderLine: Record "Shpfy Order Line";
+    begin
+        SalesAndReceivablesSetup.Get();
+        ShopifyOrderLine.SetRange("Shopify Order Id", ShopifyOrderHeader."Shopify Order Id");
+        ShopifyOrderLine.SetRange("Shopify Product Id", 0);
+        if ShopifyOrderLine.FindSet() then
+            repeat
+                if ShopifyOrderLine."Item No." = '' then begin
+                    ShopifyOrderLine."Item No." := SalesAndReceivablesSetup."PMIS Default Custom Item";
+                    ShopifyOrderLine.Modify();
+                end;
+            until ShopifyOrderLine.Next() = 0;
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Refund Process Events", OnAfterCreateItemSalesLine, '', false, false)]
+    local procedure "Shpfy Refund Process Events_OnAfterCreateItemSalesLine"(RefundHeader: Record "Shpfy Refund Header"; RefundLine: Record "Shpfy Refund Line"; SalesHeader: Record "Sales Header"; var SalesLine: Record "Sales Line")
+    begin
+        SalesAndReceivablesSetup.Get();
+        SalesLine.Reset();
+        SalesLine.SetRange("Shpfy Refund Line Id", RefundLine."Refund Line Id");
+        if SalesLine.FindFirst() then
+            if SalesLine.Type = SalesLine.Type::Item then
+                if SalesLine."No." = SalesAndReceivablesSetup."PMIS Default Custom Item" then begin
+                    SalesLine.Description := RefundLine.Description;
+                    SalesLine.Modify();
+                end;
+    end;
+
     var
         PMISFunctions: Codeunit "PMIS Functions";
+        SalesAndReceivablesSetup: Record "Sales & Receivables Setup";
 }
