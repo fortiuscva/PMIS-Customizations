@@ -32,7 +32,7 @@ codeunit 50101 "PMIS Functions"
         if IsExistPostedDocuments(SalesHeader) then
             exit;
 
-        if (ShopifyOrder."Financial Status" = ShopifyOrder."Financial Status"::Refunded) and (ShopifyOrder."Fulfillment Status" = ShopifyOrder."Fulfillment Status"::Unfulfilled) then begin
+        if (ShopifyOrder.Closed) and (ShopifyOrder."Fulfillment Status" = ShopifyOrder."Fulfillment Status"::Unfulfilled) then begin
             SalesLine.Reset();
             SalesLine.SetRange("Document Type", SalesHeader."Document Type");
             SalesLine.SetRange("Document No.", SalesHeader."No.");
