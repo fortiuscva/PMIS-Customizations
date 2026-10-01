@@ -9,7 +9,7 @@
       <am:Name>MSRB</am:Name>
       <am:Version>15.0.20283.0</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-09-17T18:58:20.2416018Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-10-01T17:23:09.5374698Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -775,6 +775,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+              <Top>0.075in</Top>
               <Height>0.16656in</Height>
               <Width>3.087in</Width>
               <Style>
@@ -801,6 +802,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+              <Top>0.075in</Top>
               <Left>3.0501in</Left>
               <Height>0.16656in</Height>
               <Width>2.54335in</Width>
@@ -829,6 +831,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+              <Top>0.075in</Top>
               <Left>5.61083in</Left>
               <Height>0.16656in</Height>
               <Width>1.02544in</Width>
@@ -862,6 +865,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+              <Top>0.075in</Top>
               <Left>6.66225in</Left>
               <Height>0.16656in</Height>
               <Width>1.02835in</Width>
@@ -910,7 +914,7 @@
               <Height>0.16654in</Height>
               <Width>0.90945in</Width>
               <Visibility>
-                <Hidden>=iif(ReportItems!CheckStyle.Value = 0, true, false)</Hidden>
+                <Hidden>true</Hidden>
               </Visibility>
               <DataElementOutput>NoOutput</DataElementOutput>
               <Style>
@@ -991,7 +995,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>2.30387in</Top>
+              <Top>2.36637in</Top>
               <Left>3.43239in</Left>
               <Height>0.16654in</Height>
               <Width>1.96172in</Width>
@@ -1021,7 +1025,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>2.30387in</Top>
+              <Top>2.36637in</Top>
               <Left>5.46356in</Left>
               <Height>0.16654in</Height>
               <Width>1.96981in</Width>
@@ -1077,7 +1081,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>1.91523in</Top>
+              <Top>1.89023in</Top>
               <Left>0.02904in</Left>
               <Height>0.16654in</Height>
               <Width>6.77953in</Width>
@@ -1104,7 +1108,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>2.5399in</Top>
+              <Top>2.6274in</Top>
               <Left>0.36211in</Left>
               <Height>0.16654in</Height>
               <Width>2.48031in</Width>
@@ -1126,7 +1130,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>2.70647in</Top>
+              <Top>2.79397in</Top>
               <Left>0.36211in</Left>
               <Height>0.16654in</Height>
               <Width>2.48031in</Width>
@@ -1148,7 +1152,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>2.87301in</Top>
+              <Top>2.96051in</Top>
               <Left>0.36211in</Left>
               <Height>0.16654in</Height>
               <Width>2.48031in</Width>
@@ -1170,7 +1174,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>3.03957in</Top>
+              <Top>3.12707in</Top>
               <Left>0.36211in</Left>
               <Height>0.16654in</Height>
               <Width>2.48031in</Width>
@@ -1192,7 +1196,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>3.20614in</Top>
+              <Top>3.29364in</Top>
               <Left>0.36211in</Left>
               <Height>0.16353in</Height>
               <Width>2.48031in</Width>
@@ -1240,13 +1244,19 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>0.99934in</Top>
-              <Left>0.20807in</Left>
+              <Top>0.27434in</Top>
+              <Left>0.1914in</Left>
               <Height>0.16654in</Height>
               <Width>2.48031in</Width>
               <ZIndex>13</ZIndex>
+              <Visibility>
+                <Hidden>true</Hidden>
+              </Visibility>
               <DataElementOutput>NoOutput</DataElementOutput>
               <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
                 <BackgroundColor>White</BackgroundColor>
               </Style>
             </Textbox>
@@ -1265,8 +1275,8 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>1.1659in</Top>
-              <Left>0.20807in</Left>
+              <Top>0.4409in</Top>
+              <Left>0.1914in</Left>
               <Height>0.16654in</Height>
               <Width>2.48031in</Width>
               <ZIndex>14</ZIndex>
@@ -1295,8 +1305,8 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>1.33246in</Top>
-              <Left>0.20807in</Left>
+              <Top>0.60746in</Top>
+              <Left>0.1914in</Left>
               <Height>0.16654in</Height>
               <Width>2.48031in</Width>
               <ZIndex>15</ZIndex>
@@ -1325,8 +1335,8 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>1.49902in</Top>
-              <Left>0.20807in</Left>
+              <Top>0.77402in</Top>
+              <Left>0.1914in</Left>
               <Height>0.16654in</Height>
               <Width>2.48031in</Width>
               <ZIndex>16</ZIndex>
@@ -1355,7 +1365,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>1.66557in</Top>
+              <Top>0.79057in</Top>
               <Left>0.20807in</Left>
               <Height>0.16654in</Height>
               <Width>2.48031in</Width>
@@ -1385,13 +1395,17 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>2.08177in</Top>
+              <Top>2.05677in</Top>
               <Left>0.03011in</Left>
               <Height>0.16654in</Height>
               <Width>6.77953in</Width>
               <ZIndex>18</ZIndex>
               <DataElementOutput>NoOutput</DataElementOutput>
-              <Style />
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
             </Textbox>
             <Textbox Name="textbox2">
               <KeepTogether>true</KeepTogether>
