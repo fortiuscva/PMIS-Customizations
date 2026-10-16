@@ -131,7 +131,26 @@ codeunit 50100 "PMIS Event Subscribers"
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Refund Process Events", OnAfterProcessSalesDocument, '', false, false)]
     local procedure "Shpfy Refund Process Events_OnAfterProcessSalesDocument"(RefundHeader: Record "Shpfy Refund Header"; var SalesHeader: Record "Sales Header")
+    var
+        SalesLine: Record "Sales Line";
+        ReleaseSalesDocument: Codeunit "Release Sales Document";
+        ShopifyShop: Record "Shpfy Shop";
+        TaxSetup: Record "Tax Setup";
     begin
+        ShopifyShop.Get(RefundHeader."Shop Code");
+        TaxSetup.Get();
+        ReleaseSalesDocument.Reopen(SalesHeader);
+        SalesLine.SetRange("Document Type", SalesHeader."Document Type");
+        SalesLine.SetRange("Document No.", SalesHeader."No.");
+        SalesLine.SetRange(Type, SalesLine.Type::"G/L Account");
+
+        if (SalesLine."No." <> ShopifyShop."Shipping Charges Account") or (SalesLine."No." <> TaxSetup."Tax Account (Sales)") then begin
+            if SalesLine.FindSet() then
+                repeat
+                    SalesLine.Delete(true);
+                until SalesLine.Next() = 0;
+            ReleaseSalesDocument.Run(SalesHeader);
+        end;
         PMISFunctions.DeleteSalesOrder(RefundHeader);
     end;
 
@@ -165,6 +184,13 @@ codeunit 50100 "PMIS Event Subscribers"
                     SalesLine.Modify();
                 end;
     end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Order Events", OnAfterImportShopifyOrderHeader, '', false, false)]
+    local procedure "Shpfy Order Events_OnAfterImportShopifyOrderHeader"(var ShopifyOrderHeader: Record "Shpfy Order Header"; IsNew: Boolean)
+    begin
+        PMISFunctions.DeleteCancelledSalesOrder(ShopifyOrderHeader);
+    end;
+
 
     var
         PMISFunctions: Codeunit "PMIS Functions";
