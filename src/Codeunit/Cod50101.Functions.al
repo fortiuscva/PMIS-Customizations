@@ -32,18 +32,17 @@ codeunit 50101 "PMIS Functions"
         if IsExistPostedDocuments(SalesHeader) then
             exit;
 
-        if (ShopifyOrder.Closed) and (ShopifyOrder."Fulfillment Status" = ShopifyOrder."Fulfillment Status"::Unfulfilled) then begin
-            SalesLine.Reset();
-            SalesLine.SetRange("Document Type", SalesHeader."Document Type");
-            SalesLine.SetRange("Document No.", SalesHeader."No.");
+        // if (ShopifyOrder.Closed) and (ShopifyOrder."Fulfillment Status" = ShopifyOrder."Fulfillment Status"::Unfulfilled) then begin
+        SalesLine.Reset();
+        SalesLine.SetRange("Document Type", SalesHeader."Document Type");
+        SalesLine.SetRange("Document No.", SalesHeader."No.");
 
-            if SalesLine.FindSet() then
-                repeat
-                    SalesLine.Delete(true);
-                until SalesLine.Next() = 0;
+        if SalesLine.FindSet() then
+            repeat
+                SalesLine.Delete(true);
+            until SalesLine.Next() = 0;
 
-            SalesHeader.Delete(true);
-        end;
+        SalesHeader.Delete(true);
 
     end;
 
@@ -71,6 +70,48 @@ codeunit 50101 "PMIS Functions"
         SalesInvoiceLine.SetRange("Order No.", SalesHeader."No.");
 
         if not SalesInvoiceLine.IsEmpty() then
+            exit(true);
+
+        exit(false);
+    end;
+
+    procedure DeleteCancelledSalesOrder(ShopifyOrderHeader: Record "Shpfy Order Header")
+    var
+        SalesHeader: Record "Sales Header";
+    begin
+        if ShopifyOrderHeader."Cancelled At" = 0DT then
+            exit;
+
+        if ShopifyOrderHeader."Sales Order No." = '' then
+            exit;
+
+        if not SalesHeader.Get(SalesHeader."Document Type"::Order, ShopifyOrderHeader."Sales Order No.")
+        then
+            exit;
+
+        if HasPostedShipmentOrInvoice(SalesHeader) then
+            exit;
+
+        // Delete the unposted Sales Order.
+        SalesHeader.Delete(true);
+    end;
+
+    local procedure HasPostedShipmentOrInvoice(SalesHeader: Record "Sales Header"): Boolean
+    var
+        SalesShipmentHeader: Record "Sales Shipment Header";
+        SalesInvoiceHeader: Record "Sales Invoice Header";
+        SalesCrMemoHeader: Record "Sales Cr.Memo Header";
+    begin
+        SalesShipmentHeader.SetRange("Order No.", SalesHeader."No.");
+        if not SalesShipmentHeader.IsEmpty() then
+            exit(true);
+
+        SalesInvoiceHeader.SetRange("Order No.", SalesHeader."No.");
+        if not SalesInvoiceHeader.IsEmpty() then
+            exit(true);
+
+        SalesCrMemoHeader.SetRange("Pre-Assigned No.", SalesHeader."No.");
+        if not SalesCrMemoHeader.IsEmpty() then
             exit(true);
 
         exit(false);
