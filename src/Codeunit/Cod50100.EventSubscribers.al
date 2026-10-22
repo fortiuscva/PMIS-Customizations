@@ -6,12 +6,14 @@ codeunit 50100 "PMIS Event Subscribers"
         SalesAndReceivablesSetup.Get();
         SalesLine.Reset();
         SalesLine.SetRange("Shpfy Order Line Id", ShopifyOrderLine."Line Id");
-        if SalesLine.FindFirst() then
-            if SalesLine.Type = SalesLine.Type::Item then
-                if SalesLine."No." = SalesAndReceivablesSetup."PMIS Default Custom Item" then begin
-                    SalesLine.Description := ShopifyOrderLine.Description;
-                    SalesLine.Modify();
-                end;
+        if SalesLine.FindSet() then
+            repeat
+                if SalesLine.Type = SalesLine.Type::Item then
+                    if SalesLine."No." = SalesAndReceivablesSetup."PMIS Default Custom Item" then begin
+                        SalesLine.Description := ShopifyOrderLine.Description;
+                    end;
+            until SalesLine.Next() = 0;
+        SalesLine.Modify();
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Order Events", OnBeforeCreateItemSalesLine, '', false, false)]
@@ -86,70 +88,70 @@ codeunit 50100 "PMIS Event Subscribers"
         Shop: Record "Shpfy Shop";
         ShopLocation: Record "Shpfy Shop Location";
     begin
-        if RefundLine."Item No." = '' then
-            exit;
-        Shop.Get(RefundHeader."Shop Code");
+        // if RefundLine."Item No." = '' then
+        //     exit;
+        // Shop.Get(RefundHeader."Shop Code");
 
-        SalesLine.Reset();
-        SalesLine.SetRange("Document Type", SalesHeader."Document Type");
-        SalesLine.SetRange("Document No.", SalesHeader."No.");
+        // SalesLine.Reset();
+        // SalesLine.SetRange("Document Type", SalesHeader."Document Type");
+        // SalesLine.SetRange("Document No.", SalesHeader."No.");
 
-        if SalesLine.FindLast() then
-            NextLineNo := SalesLine."Line No." + 10000
-        else
-            NextLineNo := 10000;
+        // if SalesLine.FindLast() then
+        //     NextLineNo := SalesLine."Line No." + 10000
+        // else
+        //     NextLineNo := 10000;
 
-        SalesLine.Init();
-        SalesLine.SetHideValidationDialog(true);
+        // SalesLine.Init();
+        // SalesLine.SetHideValidationDialog(true);
 
-        SalesLine.Validate("Document Type", SalesHeader."Document Type");
-        SalesLine.Validate("Document No.", SalesHeader."No.");
-        SalesLine.Validate("Line No.", NextLineNo);
+        // SalesLine.Validate("Document Type", SalesHeader."Document Type");
+        // SalesLine.Validate("Document No.", SalesHeader."No.");
+        // SalesLine.Validate("Line No.", NextLineNo);
 
-        SalesLine.Insert(true);
+        // SalesLine.Insert(true);
 
-        SalesLine.Validate(Type, SalesLine.Type::Item);
-        SalesLine.Validate("No.", RefundLine."Item No.");
+        // SalesLine.Validate(Type, SalesLine.Type::Item);
+        // SalesLine.Validate("No.", RefundLine."Item No.");
 
-        if RefundLine."Variant Code" <> '' then
-            SalesLine.Validate("Variant Code", RefundLine."Variant Code");
+        // if RefundLine."Variant Code" <> '' then
+        //     SalesLine.Validate("Variant Code", RefundLine."Variant Code");
 
-        if RefundLine."Unit of Measure Code" <> '' then
-            SalesLine.Validate("Unit of Measure Code", RefundLine."Unit of Measure Code");
+        // if RefundLine."Unit of Measure Code" <> '' then
+        //     SalesLine.Validate("Unit of Measure Code", RefundLine."Unit of Measure Code");
 
-        if ShopLocation.Get(Shop.Code, RefundLine."Location Id")
-        then
-            SalesLine.Validate("Location Code", ShopLocation."Default Location Code");
+        // if ShopLocation.Get(Shop.Code, RefundLine."Location Id")
+        // then
+        //     SalesLine.Validate("Location Code", ShopLocation."Default Location Code");
 
-        if (Shop."Return Location Priority" =
-            "Shpfy Return Location Priority"::"Default Return Location") or
-           (SalesLine."Location Code" = '')
-        then
-            SalesLine.Validate("Location Code", Shop."Return Location");
+        // if (Shop."Return Location Priority" =
+        //     "Shpfy Return Location Priority"::"Default Return Location") or
+        //    (SalesLine."Location Code" = '')
+        // then
+        //     SalesLine.Validate("Location Code", Shop."Return Location");
 
-        SalesLine.Validate(Quantity, RefundLine.Quantity);
+        // SalesLine.Validate(Quantity, RefundLine.Quantity);
 
-        case Shop."Currency Handling" of
-            "Shpfy Currency Handling"::"Shop Currency":
-                begin
-                    SalesLine.Validate("Unit Price", RefundLine.Amount);
+        // case Shop."Currency Handling" of
+        //     "Shpfy Currency Handling"::"Shop Currency":
+        //         begin
+        //             SalesLine.Validate("Unit Price", RefundLine.Amount);
 
-                    SalesLine.Validate("Line Discount Amount", (SalesLine."Unit Price" * SalesLine.Quantity) - RefundLine."Subtotal Amount");
-                end;
+        //             SalesLine.Validate("Line Discount Amount", (SalesLine."Unit Price" * SalesLine.Quantity) - RefundLine."Subtotal Amount");
+        //         end;
 
-            "Shpfy Currency Handling"::"Presentment Currency":
-                begin
-                    SalesLine.Validate("Unit Price", RefundLine."Presentment Amount");
+        //     "Shpfy Currency Handling"::"Presentment Currency":
+        //         begin
+        //             SalesLine.Validate("Unit Price", RefundLine."Presentment Amount");
 
-                    SalesLine.Validate("Line Discount Amount", (SalesLine."Unit Price" * SalesLine.Quantity) - RefundLine."Presentment Subtotal Amount");
-                end;
-        end;
+        //             SalesLine.Validate("Line Discount Amount", (SalesLine."Unit Price" * SalesLine.Quantity) - RefundLine."Presentment Subtotal Amount");
+        //         end;
+        // end;
 
-        SalesLine."Shpfy Refund Id" := RefundHeader."Refund Id";
-        SalesLine."Shpfy Refund Line Id" := RefundLine."Refund Line Id";
-        SalesLine.Modify(true);
+        // SalesLine."Shpfy Refund Id" := RefundHeader."Refund Id";
+        // SalesLine."Shpfy Refund Line Id" := RefundLine."Refund Line Id";
+        // SalesLine.Modify(true);
 
-        Handled := true;
+        // Handled := true;
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Refund Process Events", OnAfterProcessSalesDocument, '', false, false)]
@@ -170,9 +172,9 @@ codeunit 50100 "PMIS Event Subscribers"
         if (SalesLine."No." <> ShopifyShop."Shipping Charges Account") or (SalesLine."No." <> TaxSetup."Tax Account (Sales)") then begin
             if SalesLine.FindSet() then
                 repeat
-                    SalesLine.Delete(true);
+                //     SalesLine.Delete(true);
                 until SalesLine.Next() = 0;
-            ReleaseSalesDocument.Run(SalesHeader);
+            ReleaseSalesDocument.ReleaseSalesHeader(SalesHeader, true)
         end;
         PMISFunctions.DeleteSalesOrder(RefundHeader);
     end;
@@ -196,22 +198,56 @@ codeunit 50100 "PMIS Event Subscribers"
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Refund Process Events", OnAfterCreateItemSalesLine, '', false, false)]
     local procedure "Shpfy Refund Process Events_OnAfterCreateItemSalesLine"(RefundHeader: Record "Shpfy Refund Header"; RefundLine: Record "Shpfy Refund Line"; SalesHeader: Record "Sales Header"; var SalesLine: Record "Sales Line")
+    var
+        SalesLineRec: Record "Sales Line";
+        TaxSetup: Record "Tax Setup";
+        GLAccount: Record "G/L Account";
     begin
         SalesAndReceivablesSetup.Get();
         SalesLine.Reset();
         SalesLine.SetRange("Shpfy Refund Line Id", RefundLine."Refund Line Id");
-        if SalesLine.FindFirst() then
-            if SalesLine.Type = SalesLine.Type::Item then
-                if SalesLine."No." = SalesAndReceivablesSetup."PMIS Default Custom Item" then begin
-                    SalesLine.Description := RefundLine.Description;
-                    SalesLine.Modify();
-                end;
+        if SalesLine.Findset() then
+            repeat
+                if SalesLine.Type = SalesLine.Type::Item then
+                    if SalesLine."No." = SalesAndReceivablesSetup."PMIS Default Custom Item" then begin
+                        SalesLine.Description := RefundLine.Description;
+                    end;
+            until SalesLine.Next() = 0;
+        SalesLine.Modify();
+        SalesLineRec.Reset();
+        SalesLine.SetRange("Shpfy Refund Line Id", RefundLine."Refund Line Id");
+        SalesLineRec.SetRange("Document No.", SalesHeader."No.");
+        SalesLineRec.SetRange(Type, SalesLineRec.Type::"G/L Account");
+        if TaxSetup.Get() then
+            SalesLineRec.SetRange("No.", TaxSetup."Tax Account (Sales)");
+        if SalesLineRec.FindFirst() then
+            exit;
+        if (TaxSetup.Get()) and (GLAccount.Get(TaxSetup."Tax Account (Sales)")) and (RefundLine."Total Tax Amount" <> 0) then begin
+            SalesLineRec.Init();
+            SalesLineRec.Validate("Document Type", SalesHeader."Document Type");
+            SalesLineRec.Validate("Document No.", SalesHeader."No.");
+            SalesLineRec.Validate("Line No.", SalesLine."Line No." + 10000);
+            SalesLineRec.Validate(Type, SalesLine.Type::"G/L Account");
+            SalesLineRec.Validate("No.", GLAccount."No.");
+            SalesLineRec.Validate(Description, 'Shopify Sales Tax');
+            SalesLineRec.Validate(Quantity, 1);
+            SalesLineRec.Validate("Unit Price", RefundLine."Total Tax Amount");
+            SalesLineRec.Validate(Amount, RefundLine.Amount);
+            SalesLineRec.Insert();
+        end;
+
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Order Events", OnAfterImportShopifyOrderHeader, '', false, false)]
     local procedure "Shpfy Order Events_OnAfterImportShopifyOrderHeader"(var ShopifyOrderHeader: Record "Shpfy Order Header"; IsNew: Boolean)
     begin
         PMISFunctions.DeleteCancelledSalesOrder(ShopifyOrderHeader);
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Refund Process Events", OnBeforeCreateSalesLinesFromRemainingAmount, '', false, false)]
+    local procedure "Shpfy Refund Process Events_OnBeforeCreateSalesLinesFromRemainingAmount"(RefundHeader: Record "Shpfy Refund Header"; var SalesHeader: Record "Sales Header"; var SkipBalancing: Boolean)
+    begin
+        SkipBalancing := true;
     end;
 
 
