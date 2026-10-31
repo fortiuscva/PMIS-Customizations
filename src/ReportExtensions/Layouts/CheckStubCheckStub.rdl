@@ -53,7 +53,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.49961in</Height>
+                  <Height>0.46836in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -261,7 +261,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.16654in</Height>
+                  <Height>0.13529in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -425,7 +425,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.1875in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -442,7 +442,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox94</rd:DefaultName>
@@ -778,6 +780,9 @@
                       <KeepTogether>true</KeepTogether>
                     </TablixMember>
                   </TablixMembers>
+                  <Visibility>
+                    <Hidden>=RowNumber("Table1_Group1") &lt;= 10</Hidden>
+                  </Visibility>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
@@ -791,19 +796,19 @@
                 </FilterValues>
               </Filter>
             </Filters>
-            <Top>0.125in</Top>
-            <Height>0.9474in</Height>
+            <Top>0.0375in</Top>
+            <Height>0.8224in</Height>
             <Width>7.5748in</Width>
             <Style />
           </Tablix>
         </ReportItems>
-        <Height>1.0724in</Height>
+        <Height>0.8599in</Height>
         <Style />
       </Body>
       <Width>7.93701in</Width>
       <Page>
         <PageHeader>
-          <Height>1.37958in</Height>
+          <Height>0.55917in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1135,7 +1140,7 @@
               <KeepTogether>true</KeepTogether>
               <Top>0.30222in</Top>
               <Left>0.03011in</Left>
-              <Height>0.95694in</Height>
+              <Height>0.25694in</Height>
               <Width>7.81925in</Width>
               <ZIndex>4</ZIndex>
               <Style>
@@ -1144,62 +1149,6 @@
                 </Border>
               </Style>
             </Rectangle>
-            <Textbox Name="Textbox17">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>See Report for multi-invoice details</Value>
-                      <Style>
-                        <FontFamily>Segoe UI</FontFamily>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>See Report for multi-invoice details</Value>
-                      <Style>
-                        <FontFamily>Segoe UI</FontFamily>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>See Report for multi-invoice details</Value>
-                      <Style>
-                        <FontFamily>Segoe UI</FontFamily>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox11</rd:DefaultName>
-              <Top>0.65458in</Top>
-              <Height>0.6in</Height>
-              <Width>4.82292in</Width>
-              <ZIndex>5</ZIndex>
-              <Visibility>
-                <Hidden>true</Hidden>
-              </Visibility>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
           </ReportItems>
           <Style />
         </PageHeader>
@@ -1754,7 +1703,11 @@
               <Visibility>
                 <Hidden>true</Hidden>
               </Visibility>
-              <Style />
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
             </Textbox>
             <Textbox Name="textbox3">
               <KeepTogether>true</KeepTogether>
