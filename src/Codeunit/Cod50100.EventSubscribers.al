@@ -250,6 +250,20 @@ codeunit 50100 "PMIS Event Subscribers"
         SkipBalancing := true;
     end;
 
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Req. Wksh.-Make Order", OnBeforePurchOrderLineInsert, '', false, false)]
+    local procedure "Req. Wksh.-Make Order_OnBeforePurchOrderLineInsert"(var PurchOrderHeader: Record "Purchase Header"; var PurchOrderLine: Record "Purchase Line"; var ReqLine: Record "Requisition Line"; CommitIsSuppressed: Boolean)
+    var
+        SalesLine: Record "Sales Line";
+        ReqLineToUpdate: Record "Requisition Line";
+    begin
+        if ReqLine."Demand Type" <> Database::"Sales Line" then
+            exit;
+        if not SalesLine.Get(ReqLine."Demand Subtype", ReqLine."Demand Order No.", ReqLine."Demand Line No.")
+        then
+            exit;
+        PurchOrderLine.Description := SalesLine.Description;
+    end;
+
 
     var
         PMISFunctions: Codeunit "PMIS Functions";
