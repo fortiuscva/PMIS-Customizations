@@ -903,11 +903,12 @@
                                   <Value>=Fields!InvoiceAmount.Value</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
+                                    <Format>=Fields!InvoiceAmountFormat.Value</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Left</TextAlign>
+                                <TextAlign>Center</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -937,6 +938,7 @@
                                   <Value>=Fields!AmountPaid.Value</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
+                                    <Format>=Fields!AmountPaidFormat.Value</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -971,6 +973,7 @@
                                   <Value>=Fields!DiscountGiven.Value</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
+                                    <Format>=Fields!DiscountGivenFormat.Value</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1005,11 +1008,12 @@
                                   <Value>=Fields!NetAmount.Value</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
+                                    <Format>=Fields!NetAmountFormat.Value</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Left</TextAlign>
+                                <TextAlign>Center</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -1175,7 +1179,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!InvoiceAmount.Value)</Value>
+                                  <Value>="$ " &amp; Sum(Fields!InvoiceAmount.Value)</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                   </Style>
@@ -1273,7 +1277,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!NetAmount.Value)</Value>
+                                  <Value>="$ " &amp; Sum(Fields!NetAmount.Value)</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                   </Style>
