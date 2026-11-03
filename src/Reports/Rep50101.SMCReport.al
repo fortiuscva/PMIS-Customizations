@@ -1,3 +1,4 @@
+
 report 50101 "PMIS SMC Report"
 {
     ApplicationArea = All;
@@ -5,9 +6,50 @@ report 50101 "PMIS SMC Report"
     UsageCategory = ReportsAndAnalysis;
     ProcessingOnly = true;
 
+    requestpage
+    {
+        layout
+        {
+            area(Content)
+            {
+                group(Filters)
+                {
+                    Caption = 'Filters';
+
+                    field(FromDate; FromDate)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'From Date';
+                        ToolTip = 'Specifies the starting document date.';
+                    }
+
+                    field(ToDate; ToDate)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'To Date';
+                        ToolTip = 'Specifies the ending document date.';
+                    }
+
+                    field(VendorNoFilter; VendorNoFilter)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Vendor Filter';
+                        TableRelation = Vendor."No.";
+                    }
+                }
+            }
+        }
+    }
+
     trigger OnPreReport()
     begin
+        if (FromDate <> 0D) and (ToDate <> 0D) then
+            if FromDate > ToDate then
+                Error('From Date cannot be later than To Date.');
+
         ExcelBuffer.DeleteAll();
+        DataRowCount := 0;
+
         AddColumnHeaders();
     end;
 
@@ -26,9 +68,10 @@ report 50101 "PMIS SMC Report"
         ExcelBuffer.OpenExcel();
     end;
 
-    local procedure AddColumnHeaders()
+    procedure AddColumnHeaders()
     begin
         ExcelBuffer.NewRow();
+
         AddTextColumn('SMC Account Number');
         AddTextColumn('Distributor Branch Code');
         AddTextColumn('Customer Number');
@@ -46,9 +89,11 @@ report 50101 "PMIS SMC Report"
         AddTextColumn('Agreement Number');
     end;
 
-    local procedure ExportSalesInvoices()
+    procedure ExportSalesInvoices()
     begin
         SalesInvoiceHeader.Reset();
+        ApplyInvoiceDateFilter();
+
         if SalesInvoiceHeader.FindSet() then
             repeat
                 SalesInvoiceLine.Reset();
@@ -59,12 +104,15 @@ report 50101 "PMIS SMC Report"
                     repeat
                         WriteInvoiceLine(SalesInvoiceHeader, SalesInvoiceLine);
                     until SalesInvoiceLine.Next() = 0;
+
             until SalesInvoiceHeader.Next() = 0;
     end;
 
-    local procedure ExportSalesCreditMemos()
+    procedure ExportSalesCreditMemos()
     begin
         SalesCrMemoHeader.Reset();
+        ApplyCreditMemoDateFilter();
+
         if SalesCrMemoHeader.FindSet() then
             repeat
                 SalesCrMemoLine.Reset();
@@ -75,24 +123,50 @@ report 50101 "PMIS SMC Report"
                     repeat
                         WriteCreditMemoLine(SalesCrMemoHeader, SalesCrMemoLine);
                     until SalesCrMemoLine.Next() = 0;
+
             until SalesCrMemoHeader.Next() = 0;
     end;
 
-    local procedure WriteInvoiceLine(InvoiceHeader: Record "Sales Invoice Header";
-        InvoiceLine: Record "Sales Invoice Line")
+    procedure ApplyInvoiceDateFilter()
+    begin
+        if (FromDate <> 0D) and (ToDate <> 0D) then
+            SalesInvoiceHeader.SetRange("Document Date", FromDate, ToDate)
+        else
+            if FromDate <> 0D then
+                SalesInvoiceHeader.SetFilter("Document Date", '>=%1', FromDate)
+            else
+                if ToDate <> 0D then
+                    SalesInvoiceHeader.SetFilter("Document Date", '<=%1', ToDate);
+    end;
+
+    procedure ApplyCreditMemoDateFilter()
+    begin
+        if (FromDate <> 0D) and (ToDate <> 0D) then
+            SalesCrMemoHeader.SetRange("Document Date", FromDate, ToDate)
+        else
+            if FromDate <> 0D then
+                SalesCrMemoHeader.SetFilter("Document Date", '>=%1', FromDate)
+            else
+                if ToDate <> 0D then
+                    SalesCrMemoHeader.SetFilter("Document Date", '<=%1', ToDate);
+    end;
+
+    procedure WriteInvoiceLine(InvoiceHeader: Record "Sales Invoice Header"; InvoiceLine: Record "Sales Invoice Line")
     var
+        SMCAccountNo: Text;
         UnitPrice: Decimal;
     begin
-        if InvoiceLine.Type <> InvoiceLine.Type::Item then
-            exit;
         if InvoiceLine.Quantity = 0 then
+            exit;
+
+        if not IsEligibleItem(InvoiceLine."No.", SMCAccountNo) then
             exit;
 
         UnitPrice := InvoiceLine."Unit Price";
 
         ExcelBuffer.NewRow();
 
-        AddTextColumn(GetSMCAccountNumber(InvoiceLine."No."));
+        AddTextColumn(SMCAccountNo);
         AddTextColumn('YAK');
         AddTextColumn(InvoiceHeader."Sell-to Customer No.");
         AddTextColumn(InvoiceHeader."Sell-to Customer Name");
@@ -104,26 +178,29 @@ report 50101 "PMIS SMC Report"
         AddTextColumn(FormatDocumentDate(InvoiceHeader."Document Date"));
         AddTextColumn(InvoiceLine."No.");
         AddTextColumn(Format(Abs(InvoiceLine.Quantity), 0, 9));
-        AddTextColumn(InvoiceLine."Unit of Measure Code");
+        AddTextColumn('EA');
         AddTextColumn(Format(UnitPrice, 0, '<Precision,2:2><Standard Format,0>'));
         AddTextColumn('0');
 
         DataRowCount += 1;
     end;
 
-
-    local procedure WriteCreditMemoLine(CreditMemoHeader: Record "Sales Cr.Memo Header"; CreditMemoLine: Record "Sales Cr.Memo Line")
+    procedure WriteCreditMemoLine(CreditMemoHeader: Record "Sales Cr.Memo Header"; CreditMemoLine: Record "Sales Cr.Memo Line")
     var
+        SMCAccountNo: Text;
         UnitPrice: Decimal;
     begin
         if CreditMemoLine.Quantity = 0 then
+            exit;
+
+        if not IsEligibleItem(CreditMemoLine."No.", SMCAccountNo) then
             exit;
 
         UnitPrice := CreditMemoLine."Unit Price";
 
         ExcelBuffer.NewRow();
 
-        AddTextColumn(GetSMCAccountNumber(CreditMemoLine."No."));
+        AddTextColumn(SMCAccountNo);
         AddTextColumn('YAK');
         AddTextColumn(CreditMemoHeader."Sell-to Customer No.");
         AddTextColumn(CreditMemoHeader."Sell-to Customer Name");
@@ -132,18 +209,45 @@ report 50101 "PMIS SMC Report"
         AddTextColumn(CreditMemoHeader."Ship-to County");
         AddTextColumn(CreditMemoHeader."Ship-to Post Code");
         AddTextColumn(CreditMemoHeader."No.");
-        AddTextColumn(FormatDocumentDate(CreditMemoHeader."Document Date"));
+        AddTextColumn(
+            FormatDocumentDate(CreditMemoHeader."Document Date"));
         AddTextColumn(CreditMemoLine."No.");
         AddTextColumn(Format(Abs(CreditMemoLine.Quantity), 0, 9));
-        AddTextColumn(CreditMemoLine."Unit of Measure Code");
-        AddTextColumn(Format(UnitPrice, 0, '<Precision,2:2><Standard Format,0>'));
+        AddTextColumn('EA');
+        AddTextColumn(
+            Format(UnitPrice, 0, '<Precision,2:2><Standard Format,0>'));
         AddTextColumn('0');
 
         DataRowCount += 1;
     end;
 
+    procedure IsEligibleItem(ItemNo: Code[20]; var SMCAccountNo: Text): Boolean
+    var
+        Item: Record Item;
+        Vendor: Record Vendor;
+    begin
+        Clear(SMCAccountNo);
+        Item.SetRange("No.", ItemNo);
+        if VendorNoFilter <> '' then
+            Item.SetFilter("Vendor No.", VendorNoFilter);
+        if not Item.FindFirst() then
+            exit(false);
 
-    local procedure FormatDocumentDate(DocumentDate: Date): Text
+        if Item."Vendor No." = '' then
+            exit(false);
+
+        if not Vendor.Get(Item."Vendor No.") then
+            exit(false);
+
+        if Vendor."Our Account No." = '' then
+            exit(false);
+
+        SMCAccountNo := Vendor."Our Account No.";
+
+        exit(true);
+    end;
+
+    procedure FormatDocumentDate(DocumentDate: Date): Text
     begin
         if DocumentDate = 0D then
             exit('');
@@ -151,40 +255,9 @@ report 50101 "PMIS SMC Report"
         exit(Format(DocumentDate, 0, '<Year4><Month,2><Day,2>'));
     end;
 
-
-    local procedure CalculateUnitPrice(
-        LineAmount: Decimal;
-        LineQuantity: Decimal): Decimal
+    procedure AddTextColumn(ColumnValue: Text)
     begin
-        if LineQuantity = 0 then
-            exit(0);
-
-        exit(Round(Abs(LineAmount) / Abs(LineQuantity), 0.01));
-    end;
-
-
-    local procedure GetSMCAccountNumber(ItemNo: Code[20]): Text
-
-    var
-        Item: Record Item;
-        Vendor: Record Vendor;
-    begin
-        if Item.Get(ItemNo) then
-            if Item."Vendor No." <> '' then
-                if Vendor.Get(Item."Vendor No.") then
-                    if Vendor."Our Account No." <> '' then
-                        exit(Vendor."Our Account No.");
-        exit('');
-    end;
-
-
-    local procedure AddTextColumn(ColumnValue: Text)
-    begin
-        ExcelBuffer.AddColumn(
-            ColumnValue,
-            false,
-            '',
-            false,
+        ExcelBuffer.AddColumn(ColumnValue, false, '', false,
             false,
             false,
             '',
@@ -198,4 +271,7 @@ report 50101 "PMIS SMC Report"
         SalesCrMemoHeader: Record "Sales Cr.Memo Header";
         SalesCrMemoLine: Record "Sales Cr.Memo Line";
         DataRowCount: Integer;
+        FromDate: Date;
+        ToDate: Date;
+        VendorNoFilter: Text;
 }
