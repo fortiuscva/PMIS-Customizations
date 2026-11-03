@@ -22,6 +22,169 @@
       <rd:DataSourceID>ace23880-ab05-4ebb-af60-13aee80ed1a7</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="Number">
+          <DataField>Number</DataField>
+        </Field>
+        <Field Name="CompanyNameText">
+          <DataField>CompanyNameText</DataField>
+        </Field>
+        <Field Name="DateText">
+          <DataField>DateText</DataField>
+        </Field>
+        <Field Name="No_SalesHeader">
+          <DataField>No_SalesHeader</DataField>
+        </Field>
+        <Field Name="CustomerNo_SalesHeader">
+          <DataField>CustomerNo_SalesHeader</DataField>
+        </Field>
+        <Field Name="CustomerName_SalesHeader">
+          <DataField>CustomerName_SalesHeader</DataField>
+        </Field>
+        <Field Name="LineNo_SalesLine">
+          <DataField>LineNo_SalesLine</DataField>
+        </Field>
+        <Field Name="ItemNo_SalesLine">
+          <DataField>ItemNo_SalesLine</DataField>
+        </Field>
+        <Field Name="Description_SalesLine">
+          <DataField>Description_SalesLine</DataField>
+        </Field>
+        <Field Name="VariantCode_SalesLine">
+          <DataField>VariantCode_SalesLine</DataField>
+        </Field>
+        <Field Name="LocationCode_SalesLine">
+          <DataField>LocationCode_SalesLine</DataField>
+        </Field>
+        <Field Name="BinCode_SalesLine">
+          <DataField>BinCode_SalesLine</DataField>
+        </Field>
+        <Field Name="ShipmentDate_SalesLine">
+          <DataField>ShipmentDate_SalesLine</DataField>
+        </Field>
+        <Field Name="Quantity_SalesLine">
+          <DataField>Quantity_SalesLine</DataField>
+        </Field>
+        <Field Name="Quantity_SalesLineFormat">
+          <DataField>Quantity_SalesLineFormat</DataField>
+        </Field>
+        <Field Name="UnitOfMeasure_SalesLine">
+          <DataField>UnitOfMeasure_SalesLine</DataField>
+        </Field>
+        <Field Name="QuantityToShip_SalesLine">
+          <DataField>QuantityToShip_SalesLine</DataField>
+        </Field>
+        <Field Name="QuantityToShip_SalesLineFormat">
+          <DataField>QuantityToShip_SalesLineFormat</DataField>
+        </Field>
+        <Field Name="QuantityShipped_SalesLine">
+          <DataField>QuantityShipped_SalesLine</DataField>
+        </Field>
+        <Field Name="QuantityShipped_SalesLineFormat">
+          <DataField>QuantityShipped_SalesLineFormat</DataField>
+        </Field>
+        <Field Name="QtyToAsm">
+          <DataField>QtyToAsm</DataField>
+        </Field>
+        <Field Name="QtyToAsmFormat">
+          <DataField>QtyToAsmFormat</DataField>
+        </Field>
+        <Field Name="No_AssemblyLine">
+          <DataField>No_AssemblyLine</DataField>
+        </Field>
+        <Field Name="Description_AssemblyLine">
+          <DataField>Description_AssemblyLine</DataField>
+        </Field>
+        <Field Name="VariantCode_AssemblyLine">
+          <DataField>VariantCode_AssemblyLine</DataField>
+        </Field>
+        <Field Name="Quantity_AssemblyLine">
+          <DataField>Quantity_AssemblyLine</DataField>
+        </Field>
+        <Field Name="Quantity_AssemblyLineFormat">
+          <DataField>Quantity_AssemblyLineFormat</DataField>
+        </Field>
+        <Field Name="QuantityPer_AssemblyLine">
+          <DataField>QuantityPer_AssemblyLine</DataField>
+        </Field>
+        <Field Name="QuantityPer_AssemblyLineFormat">
+          <DataField>QuantityPer_AssemblyLineFormat</DataField>
+        </Field>
+        <Field Name="UnitOfMeasure_AssemblyLine">
+          <DataField>UnitOfMeasure_AssemblyLine</DataField>
+        </Field>
+        <Field Name="LocationCode_AssemblyLine">
+          <DataField>LocationCode_AssemblyLine</DataField>
+        </Field>
+        <Field Name="BinCode_AssemblyLine">
+          <DataField>BinCode_AssemblyLine</DataField>
+        </Field>
+        <Field Name="QuantityToConsume_AssemblyLine">
+          <DataField>QuantityToConsume_AssemblyLine</DataField>
+        </Field>
+        <Field Name="QuantityToConsume_AssemblyLineFormat">
+          <DataField>QuantityToConsume_AssemblyLineFormat</DataField>
+        </Field>
+        <Field Name="PMISSellToAddress1">
+          <DataField>PMISSellToAddress1</DataField>
+        </Field>
+        <Field Name="PMISSellToAddress2">
+          <DataField>PMISSellToAddress2</DataField>
+        </Field>
+        <Field Name="PMISSellToAddress3">
+          <DataField>PMISSellToAddress3</DataField>
+        </Field>
+        <Field Name="PMISSellToAddress4">
+          <DataField>PMISSellToAddress4</DataField>
+        </Field>
+        <Field Name="PMISSellToAddress5">
+          <DataField>PMISSellToAddress5</DataField>
+        </Field>
+        <Field Name="PMISSellToAddress6">
+          <DataField>PMISSellToAddress6</DataField>
+        </Field>
+        <Field Name="PMISSellToAddress7">
+          <DataField>PMISSellToAddress7</DataField>
+        </Field>
+        <Field Name="PMISShipToAddress1">
+          <DataField>PMISShipToAddress1</DataField>
+        </Field>
+        <Field Name="PMISShipToAddress2">
+          <DataField>PMISShipToAddress2</DataField>
+        </Field>
+        <Field Name="PMISShipToAddress3">
+          <DataField>PMISShipToAddress3</DataField>
+        </Field>
+        <Field Name="PMISShipToAddress4">
+          <DataField>PMISShipToAddress4</DataField>
+        </Field>
+        <Field Name="PMISShipToAddress5">
+          <DataField>PMISShipToAddress5</DataField>
+        </Field>
+        <Field Name="PMISShipToAddress6">
+          <DataField>PMISShipToAddress6</DataField>
+        </Field>
+        <Field Name="PMISShipToAddress7">
+          <DataField>PMISShipToAddress7</DataField>
+        </Field>
+        <Field Name="PMISExternalDocumentNo">
+          <DataField>PMISExternalDocumentNo</DataField>
+        </Field>
+        <Field Name="PMISShipmentMethodCode">
+          <DataField>PMISShipmentMethodCode</DataField>
+        </Field>
+        <Field Name="PMISPaymentTermsCode">
+          <DataField>PMISPaymentTermsCode</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -6359,7 +6522,7 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>5.82438cm</Height>
+        <Height>5.60121cm</Height>
         <Style />
       </Body>
       <Width>25.67564cm</Width>
@@ -6572,7 +6735,9 @@
                           </Style>
                         </TextRun>
                       </TextRuns>
-                      <Style />
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>Textbox54</rd:DefaultName>
@@ -6604,7 +6769,9 @@
                           </Style>
                         </TextRun>
                       </TextRuns>
-                      <Style />
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>Textbox54</rd:DefaultName>
@@ -6637,7 +6804,9 @@
                           </Style>
                         </TextRun>
                       </TextRuns>
-                      <Style />
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>Textbox54</rd:DefaultName>
@@ -6670,7 +6839,9 @@
                           </Style>
                         </TextRun>
                       </TextRuns>
-                      <Style />
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>Textbox54</rd:DefaultName>
@@ -6703,7 +6874,9 @@
                           </Style>
                         </TextRun>
                       </TextRuns>
-                      <Style />
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>Textbox54</rd:DefaultName>
@@ -6736,7 +6909,9 @@
                           </Style>
                         </TextRun>
                       </TextRuns>
-                      <Style />
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>Textbox54</rd:DefaultName>
@@ -6765,6 +6940,7 @@
                           <Value>=Parameters!SoldToCaptionLbl.Value</Value>
                           <Style>
                             <FontFamily>Segoe UI</FontFamily>
+                            <FontWeight>Bold</FontWeight>
                           </Style>
                         </TextRun>
                       </TextRuns>
@@ -6816,7 +6992,9 @@
                           </Style>
                         </TextRun>
                       </TextRuns>
-                      <Style />
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>Textbox54</rd:DefaultName>
@@ -6848,7 +7026,9 @@
                           </Style>
                         </TextRun>
                       </TextRuns>
-                      <Style />
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>Textbox54</rd:DefaultName>
@@ -6881,7 +7061,9 @@
                           </Style>
                         </TextRun>
                       </TextRuns>
-                      <Style />
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>Textbox54</rd:DefaultName>
@@ -6914,7 +7096,9 @@
                           </Style>
                         </TextRun>
                       </TextRuns>
-                      <Style />
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>Textbox54</rd:DefaultName>
@@ -6947,7 +7131,9 @@
                           </Style>
                         </TextRun>
                       </TextRuns>
-                      <Style />
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>Textbox54</rd:DefaultName>
@@ -6980,7 +7166,9 @@
                           </Style>
                         </TextRun>
                       </TextRuns>
-                      <Style />
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>Textbox54</rd:DefaultName>
@@ -7009,6 +7197,7 @@
                           <Value>=Parameters!ShipToCaptionLbl.Value</Value>
                           <Style>
                             <FontFamily>Segoe UI</FontFamily>
+                            <FontWeight>Bold</FontWeight>
                           </Style>
                         </TextRun>
                       </TextRuns>
@@ -8099,167 +8288,4 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="Number">
-          <DataField>Number</DataField>
-        </Field>
-        <Field Name="CompanyNameText">
-          <DataField>CompanyNameText</DataField>
-        </Field>
-        <Field Name="DateText">
-          <DataField>DateText</DataField>
-        </Field>
-        <Field Name="No_SalesHeader">
-          <DataField>No_SalesHeader</DataField>
-        </Field>
-        <Field Name="CustomerNo_SalesHeader">
-          <DataField>CustomerNo_SalesHeader</DataField>
-        </Field>
-        <Field Name="CustomerName_SalesHeader">
-          <DataField>CustomerName_SalesHeader</DataField>
-        </Field>
-        <Field Name="LineNo_SalesLine">
-          <DataField>LineNo_SalesLine</DataField>
-        </Field>
-        <Field Name="ItemNo_SalesLine">
-          <DataField>ItemNo_SalesLine</DataField>
-        </Field>
-        <Field Name="Description_SalesLine">
-          <DataField>Description_SalesLine</DataField>
-        </Field>
-        <Field Name="VariantCode_SalesLine">
-          <DataField>VariantCode_SalesLine</DataField>
-        </Field>
-        <Field Name="LocationCode_SalesLine">
-          <DataField>LocationCode_SalesLine</DataField>
-        </Field>
-        <Field Name="BinCode_SalesLine">
-          <DataField>BinCode_SalesLine</DataField>
-        </Field>
-        <Field Name="ShipmentDate_SalesLine">
-          <DataField>ShipmentDate_SalesLine</DataField>
-        </Field>
-        <Field Name="Quantity_SalesLine">
-          <DataField>Quantity_SalesLine</DataField>
-        </Field>
-        <Field Name="Quantity_SalesLineFormat">
-          <DataField>Quantity_SalesLineFormat</DataField>
-        </Field>
-        <Field Name="UnitOfMeasure_SalesLine">
-          <DataField>UnitOfMeasure_SalesLine</DataField>
-        </Field>
-        <Field Name="QuantityToShip_SalesLine">
-          <DataField>QuantityToShip_SalesLine</DataField>
-        </Field>
-        <Field Name="QuantityToShip_SalesLineFormat">
-          <DataField>QuantityToShip_SalesLineFormat</DataField>
-        </Field>
-        <Field Name="QuantityShipped_SalesLine">
-          <DataField>QuantityShipped_SalesLine</DataField>
-        </Field>
-        <Field Name="QuantityShipped_SalesLineFormat">
-          <DataField>QuantityShipped_SalesLineFormat</DataField>
-        </Field>
-        <Field Name="QtyToAsm">
-          <DataField>QtyToAsm</DataField>
-        </Field>
-        <Field Name="QtyToAsmFormat">
-          <DataField>QtyToAsmFormat</DataField>
-        </Field>
-        <Field Name="No_AssemblyLine">
-          <DataField>No_AssemblyLine</DataField>
-        </Field>
-        <Field Name="Description_AssemblyLine">
-          <DataField>Description_AssemblyLine</DataField>
-        </Field>
-        <Field Name="VariantCode_AssemblyLine">
-          <DataField>VariantCode_AssemblyLine</DataField>
-        </Field>
-        <Field Name="Quantity_AssemblyLine">
-          <DataField>Quantity_AssemblyLine</DataField>
-        </Field>
-        <Field Name="Quantity_AssemblyLineFormat">
-          <DataField>Quantity_AssemblyLineFormat</DataField>
-        </Field>
-        <Field Name="QuantityPer_AssemblyLine">
-          <DataField>QuantityPer_AssemblyLine</DataField>
-        </Field>
-        <Field Name="QuantityPer_AssemblyLineFormat">
-          <DataField>QuantityPer_AssemblyLineFormat</DataField>
-        </Field>
-        <Field Name="UnitOfMeasure_AssemblyLine">
-          <DataField>UnitOfMeasure_AssemblyLine</DataField>
-        </Field>
-        <Field Name="LocationCode_AssemblyLine">
-          <DataField>LocationCode_AssemblyLine</DataField>
-        </Field>
-        <Field Name="BinCode_AssemblyLine">
-          <DataField>BinCode_AssemblyLine</DataField>
-        </Field>
-        <Field Name="QuantityToConsume_AssemblyLine">
-          <DataField>QuantityToConsume_AssemblyLine</DataField>
-        </Field>
-        <Field Name="QuantityToConsume_AssemblyLineFormat">
-          <DataField>QuantityToConsume_AssemblyLineFormat</DataField>
-        </Field>
-        <Field Name="PMISSellToAddress1">
-          <DataField>PMISSellToAddress1</DataField>
-        </Field>
-        <Field Name="PMISSellToAddress2">
-          <DataField>PMISSellToAddress2</DataField>
-        </Field>
-        <Field Name="PMISSellToAddress3">
-          <DataField>PMISSellToAddress3</DataField>
-        </Field>
-        <Field Name="PMISSellToAddress4">
-          <DataField>PMISSellToAddress4</DataField>
-        </Field>
-        <Field Name="PMISSellToAddress5">
-          <DataField>PMISSellToAddress5</DataField>
-        </Field>
-        <Field Name="PMISSellToAddress6">
-          <DataField>PMISSellToAddress6</DataField>
-        </Field>
-        <Field Name="PMISSellToAddress7">
-          <DataField>PMISSellToAddress7</DataField>
-        </Field>
-        <Field Name="PMISShipToAddress1">
-          <DataField>PMISShipToAddress1</DataField>
-        </Field>
-        <Field Name="PMISShipToAddress2">
-          <DataField>PMISShipToAddress2</DataField>
-        </Field>
-        <Field Name="PMISShipToAddress3">
-          <DataField>PMISShipToAddress3</DataField>
-        </Field>
-        <Field Name="PMISShipToAddress4">
-          <DataField>PMISShipToAddress4</DataField>
-        </Field>
-        <Field Name="PMISShipToAddress5">
-          <DataField>PMISShipToAddress5</DataField>
-        </Field>
-        <Field Name="PMISShipToAddress6">
-          <DataField>PMISShipToAddress6</DataField>
-        </Field>
-        <Field Name="PMISShipToAddress7">
-          <DataField>PMISShipToAddress7</DataField>
-        </Field>
-        <Field Name="PMISExternalDocumentNo">
-          <DataField>PMISExternalDocumentNo</DataField>
-        </Field>
-        <Field Name="PMISShipmentMethodCode">
-          <DataField>PMISShipmentMethodCode</DataField>
-        </Field>
-        <Field Name="PMISPaymentTermsCode">
-          <DataField>PMISPaymentTermsCode</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>
