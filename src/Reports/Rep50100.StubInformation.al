@@ -13,6 +13,7 @@ report 50100 "PMIS Stub Information"
                 "Journal Template Name",
                 "Journal Batch Name",
                 "Line No.");
+            RequestFilterFields = "Document No.", "Account No.";
 
             column(CompanyName; CompanyInfo.Name) { }
             column(RunDate; Today) { }
@@ -124,7 +125,10 @@ report 50100 "PMIS Stub Information"
             trigger OnAfterGetRecord()
             begin
                 Clear(Vendor);
+                PaymentLine.CalcFields("PMIS Applied Entries Count");
 
+                if PaymentLine."PMIS Applied Entries Count" <= 10 then
+                    CurrReport.Skip();
                 if PaymentLine.Amount = 0 then
                     CurrReport.Skip();
 
@@ -196,6 +200,12 @@ report 50100 "PMIS Stub Information"
     begin
         JournalTemplateName := NewJournalTemplateName;
         JournalBatchName := NewJournalBatchName;
+    end;
+
+    procedure SetJournalBatch(var GenJnlLine: Record "Gen. Journal Line")
+    begin
+        JournalTemplateName := GenJnlLine."Journal Template Name";
+        JournalBatchName := GenJnlLine."Journal Batch Name";
     end;
 
     local procedure BuildInvoiceDetails()
