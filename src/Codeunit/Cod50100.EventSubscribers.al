@@ -28,10 +28,8 @@ codeunit 50100 "PMIS Event Subscribers"
             exit;
         if Item.Get(ShopifyOrderLine."Item No.") then
             exit;
-
         if not ShopifyVariant.Get(ShopifyOrderLine."Shopify Variant Id") then
             exit;
-
         if not ShopifyProduct.Get(ShopifyVariant."Product Id") then
             exit;
         ShopifyShop.Get(ShopifyOrderHeader."Shop Code");
@@ -54,7 +52,6 @@ codeunit 50100 "PMIS Event Subscribers"
             SalesLineRec.SetRange("No.", TaxSetup."Tax Account (Sales)");
         if SalesLineRec.FindFirst() then
             exit;
-
         if (TaxSetup.Get()) and (GLAccount.Get(TaxSetup."Tax Account (Sales)")) and (ShopifyOrderHeader."VAT Amount" <> 0) then begin
             SalesLineRec.Init();
             SalesLineRec.Validate("Document Type", SalesHeader."Document Type");
@@ -168,7 +165,6 @@ codeunit 50100 "PMIS Event Subscribers"
         SalesLine.SetRange("Document Type", SalesHeader."Document Type");
         SalesLine.SetRange("Document No.", SalesHeader."No.");
         SalesLine.SetRange(Type, SalesLine.Type::"G/L Account");
-
         if (SalesLine."No." <> ShopifyShop."Shipping Charges Account") or (SalesLine."No." <> TaxSetup."Tax Account (Sales)") then begin
             if SalesLine.FindSet() then
                 repeat
@@ -235,7 +231,6 @@ codeunit 50100 "PMIS Event Subscribers"
             SalesLineRec.Validate(Amount, RefundLine.Amount);
             SalesLineRec.Insert();
         end;
-
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Order Events", OnAfterImportShopifyOrderHeader, '', false, false)]
@@ -250,6 +245,13 @@ codeunit 50100 "PMIS Event Subscribers"
         SkipBalancing := true;
     end;
 
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Purch.-Post", OnBeforePostInvoice, '', false, false)]
+    local procedure "Purch.-Post_OnBeforePostInvoice"(var PurchHeader: Record "Purchase Header"; PreviewMode: Boolean; CommitIsSupressed: Boolean; var GenJnlPostLine: Codeunit "Gen. Jnl.-Post Line"; var IsHandled: Boolean; var Window: Dialog; HideProgressWindow: Boolean; var TotalPurchLine: Record "Purchase Line"; var TotalPurchLineLCY: Record "Purchase Line"; var InvoicePostingInterface: Interface "Invoice Posting"; var InvoicePostingParameters: Record "Invoice Posting Parameters"; GenJnlLineDocNo: Code[20]; GenJnlLineExtDocNo: Code[35]; GenJnlLineDocType: Enum "Gen. Journal Document Type"; SrcCode: Code[10])
+    begin
+        if PurchHeader."Document Type" = PurchHeader."Document Type"::Order then
+            if PurchHeader."Invoice Received Date" = 0D then
+                Error('You need to enter the Invoice Received Date must be filled before posting the purchase invoice.');
+    end;
 
     var
         PMISFunctions: Codeunit "PMIS Functions";
