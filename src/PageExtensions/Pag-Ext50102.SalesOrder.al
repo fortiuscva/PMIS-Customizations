@@ -10,52 +10,32 @@ pageextension 50102 "PMIS Sales Order" extends "Sales Order"
                 Caption = 'Create Special Order';
                 Image = CreateDocument;
                 ToolTip = 'Create special order requisition worksheet lines for this sales order.';
-                Ellipsis = true;
 
                 trigger OnAction()
                 var
                     SalesLine: Record "Sales Line";
-                    Purchasing: Record Purchasing;
                     ReqLine: Record "Requisition Line";
-                    ReqWkshName: Record "Requisition Wksh. Name";
-                    ReqWkshNames: Page "Req. Wksh. Names";
                     GetSalesOrders: Report "Get Sales Orders";
-                    SpecialOrderPurchasingCode: Code[10];
                 begin
+                    // Filter sales lines for the current sales order
                     SalesLine.SetRange("Document Type", Rec."Document Type");
                     SalesLine.SetRange("Document No.", Rec."No.");
+                    SalesLine.SetRange("Purchasing Code", 'SPECIAL');
 
-                    if SalesLine.FindSet() then
-                        repeat
-                            if (SpecialOrderPurchasingCode = '') and
-                               (SalesLine."Purchasing Code" <> '') and
-                               Purchasing.Get(SalesLine."Purchasing Code") and
-                               Purchasing."Special Order"
-                            then
-                                SpecialOrderPurchasingCode := SalesLine."Purchasing Code";
-                        until SalesLine.Next() = 0;
-
-                    if SpecialOrderPurchasingCode = '' then
+                    if SalesLine.IsEmpty() then
                         Error(
-                            'No sales lines with a Purchasing Code configured for Special Order were found for Sales Order %1.',
+                            'No sales lines with Purchasing Code SPECIAL were found for Sales Order %1.',
                             Rec."No.");
 
-                    SalesLine.Reset();
-                    SalesLine.SetRange("Document Type", Rec."Document Type");
-                    SalesLine.SetRange("Document No.", Rec."No.");
-                    SalesLine.SetRange("Purchasing Code", SpecialOrderPurchasingCode);
-
-                    ReqWkshNames.LookupMode(true);
-                    if ReqWkshNames.RunModal() <> Action::LookupOK then
-                        exit;
-                    ReqWkshNames.GetRecord(ReqWkshName);
-
+                    // Set the destination requisition worksheet batch
                     ReqLine.Init();
-                    ReqLine."Worksheet Template Name" :=
-                        ReqWkshName."Worksheet Template Name";
-                    ReqLine."Journal Batch Name" := ReqWkshName.Name;
+                    ReqLine."Worksheet Template Name" := 'REQ';
+                    ReqLine."Journal Batch Name" := 'DEFAULT';
 
+                    // Pass the requisition worksheet context and special order indicator
                     GetSalesOrders.SetReqWkshLine(ReqLine, 1);
+
+                    // Pass the filtered sales lines to standard Report 698
                     GetSalesOrders.SetTableView(SalesLine);
                     GetSalesOrders.UseRequestPage(true);
                     GetSalesOrders.RunModal();
