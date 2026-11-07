@@ -9,7 +9,7 @@
       <am:Name>MSRB</am:Name>
       <am:Version>15.0.20283.0</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-11-03T09:06:09.5791137Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-11-06T18:45:29.9405631Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -51,7 +51,10 @@
                                     <Width>2.75522cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>7.79399cm</Width>
+                                    <Width>5.29399cm</Width>
+                                  </TablixColumn>
+                                  <TablixColumn>
+                                    <Width>2.5cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
                                     <Width>2.5cm</Width>
@@ -152,6 +155,38 @@
                                               </Paragraph>
                                             </Paragraphs>
                                             <rd:DefaultName>Textbox30</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <PaddingLeft>5pt</PaddingLeft>
+                                              <PaddingRight>5pt</PaddingRight>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox60">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Parameters!ShopifyOrderNoCaptionLbl.Value</Value>
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>Textbox60</rd:DefaultName>
                                             <Style>
                                               <Border>
                                                 <Color>LightGrey</Color>
@@ -362,6 +397,38 @@
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
+                                          <Textbox Name="PMISShipToAddress2">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!PMISShpfyOrderNo.Value</Value>
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>PMISShipToAddress2</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <PaddingLeft>5pt</PaddingLeft>
+                                              <PaddingRight>5pt</PaddingRight>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
                                           <Textbox Name="PMISExternalDocumentNo">
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
@@ -559,6 +626,38 @@
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
+                                          <Textbox Name="Textbox106">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>Textbox106</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <PaddingLeft>5pt</PaddingLeft>
+                                              <PaddingRight>5pt</PaddingRight>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
                                           <Textbox Name="Textbox116">
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
@@ -665,6 +764,7 @@
                                   <TablixMember />
                                   <TablixMember />
                                   <TablixMember />
+                                  <TablixMember />
                                 </TablixMembers>
                               </TablixColumnHierarchy>
                               <TablixRowHierarchy>
@@ -687,13 +787,13 @@
                               <TablixBody>
                                 <TablixColumns>
                                   <TablixColumn>
-                                    <Width>2.11224cm</Width>
+                                    <Width>4.66418cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>5.83673cm</Width>
+                                    <Width>5.82071cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>0.66209cm</Width>
+                                    <Width>0.07938cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
                                     <Width>2.34256cm</Width>
@@ -708,16 +808,16 @@
                                     <Width>1.67483cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>1.7381cm</Width>
+                                    <Width>1.61705cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>1.05899cm</Width>
+                                    <Width>0.07938cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>2.29845cm</Width>
+                                    <Width>2.21672cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>0.71731cm</Width>
+                                    <Width>0.07938cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
                                     <Width>2.36167cm</Width>
@@ -6306,7 +6406,7 @@
                               <DataSetName>DataSet_Result</DataSetName>
                               <Top>1.41112cm</Top>
                               <Height>3.58979cm</Height>
-                              <Width>25.4246cm</Width>
+                              <Width>25.55749cm</Width>
                               <ZIndex>1</ZIndex>
                               <Style>
                                 <Border>
@@ -6322,6 +6422,7 @@
                             </Border>
                           </Style>
                         </Rectangle>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -7225,6 +7326,15 @@
       </DefaultValue>
       <Prompt>TermsCaptionLbl</Prompt>
     </ReportParameter>
+    <ReportParameter Name="ShopifyOrderNoCaptionLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>ShopifyOrderNoCaptionLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>ShopifyOrderNoCaptionLbl</Prompt>
+    </ReportParameter>
     <ReportParameter Name="No_SalesHeaderCaption">
       <DataType>String</DataType>
       <DefaultValue>
@@ -7409,7 +7519,7 @@
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>1</NumberOfColumns>
-      <NumberOfRows>38</NumberOfRows>
+      <NumberOfRows>39</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -7504,101 +7614,106 @@
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>18</RowIndex>
-          <ParameterName>No_SalesHeaderCaption</ParameterName>
+          <ParameterName>ShopifyOrderNoCaptionLbl</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>19</RowIndex>
-          <ParameterName>CustomerNo_SalesHeaderCaption</ParameterName>
+          <ParameterName>No_SalesHeaderCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>20</RowIndex>
-          <ParameterName>CustomerName_SalesHeaderCaption</ParameterName>
+          <ParameterName>CustomerNo_SalesHeaderCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>21</RowIndex>
-          <ParameterName>ItemNo_SalesLineCaption</ParameterName>
+          <ParameterName>CustomerName_SalesHeaderCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>22</RowIndex>
-          <ParameterName>Description_SalesLineCaption</ParameterName>
+          <ParameterName>ItemNo_SalesLineCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>23</RowIndex>
-          <ParameterName>VariantCode_SalesLineCaption</ParameterName>
+          <ParameterName>Description_SalesLineCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>24</RowIndex>
-          <ParameterName>LocationCode_SalesLineCaption</ParameterName>
+          <ParameterName>VariantCode_SalesLineCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>25</RowIndex>
-          <ParameterName>BinCode_SalesLineCaption</ParameterName>
+          <ParameterName>LocationCode_SalesLineCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>26</RowIndex>
-          <ParameterName>Quantity_SalesLineCaption</ParameterName>
+          <ParameterName>BinCode_SalesLineCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>27</RowIndex>
-          <ParameterName>UnitOfMeasure_SalesLineCaption</ParameterName>
+          <ParameterName>Quantity_SalesLineCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>28</RowIndex>
-          <ParameterName>QuantityToShip_SalesLineCaption</ParameterName>
+          <ParameterName>UnitOfMeasure_SalesLineCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>29</RowIndex>
-          <ParameterName>QuantityShipped_SalesLineCaption</ParameterName>
+          <ParameterName>QuantityToShip_SalesLineCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>30</RowIndex>
-          <ParameterName>No_AssemblyLineCaption</ParameterName>
+          <ParameterName>QuantityShipped_SalesLineCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>31</RowIndex>
-          <ParameterName>Description_AssemblyLineCaption</ParameterName>
+          <ParameterName>No_AssemblyLineCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>32</RowIndex>
-          <ParameterName>VariantCode_AssemblyLineCaption</ParameterName>
+          <ParameterName>Description_AssemblyLineCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>33</RowIndex>
-          <ParameterName>Quantity_AssemblyLineCaption</ParameterName>
+          <ParameterName>VariantCode_AssemblyLineCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>34</RowIndex>
-          <ParameterName>QuantityPer_AssemblyLineCaption</ParameterName>
+          <ParameterName>Quantity_AssemblyLineCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>35</RowIndex>
-          <ParameterName>LocationCode_AssemblyLineCaption</ParameterName>
+          <ParameterName>QuantityPer_AssemblyLineCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>36</RowIndex>
-          <ParameterName>BinCode_AssemblyLineCaption</ParameterName>
+          <ParameterName>LocationCode_AssemblyLineCaption</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>37</RowIndex>
+          <ParameterName>BinCode_AssemblyLineCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>38</RowIndex>
           <ParameterName>QuantityToConsume_AssemblyLineCaption</ParameterName>
         </CellDefinition>
       </CellDefinitions>
@@ -8254,6 +8369,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         </Field>
         <Field Name="PMISPaymentTermsCode">
           <DataField>PMISPaymentTermsCode</DataField>
+        </Field>
+        <Field Name="PMISShpfyOrderNo">
+          <DataField>PMISShpfyOrderNo</DataField>
         </Field>
       </Fields>
       <Query>
