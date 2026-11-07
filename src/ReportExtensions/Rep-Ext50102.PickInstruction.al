@@ -23,6 +23,7 @@ reportextension 50102 "PMIS Pick Instruction" extends "Pick Instruction"
             column(PMISExternalDocumentNo; "External Document No.") { }
             column(PMISShipmentMethodCode; "Shipment Method Code") { }
             column(PMISPaymentTermsCode; "Payment Terms Code") { }
+            column(PMISShpfyOrderNo; "Shpfy Order No.") { }
         }
         modify("Sales Header")
         {
@@ -34,6 +35,14 @@ reportextension 50102 "PMIS Pick Instruction" extends "Pick Instruction"
             end;
         }
     }
+
+    requestpage
+    {
+        trigger OnOpenPage()
+        begin
+            InitializeRequest(2);
+        end;
+    }
     labels
     {
         SoldToCaptionLbl = 'Sold To: ';
@@ -41,7 +50,10 @@ reportextension 50102 "PMIS Pick Instruction" extends "Pick Instruction"
         POCaptionLbl = 'P.O. #';
         ShipViaCaptionLbl = 'Ship Via: ';
         TermsCaptionLbl = 'Terms: ';
+        ShopifyOrderNoCaptionLbl = 'Shopify Order No: ';
     }
+
+
     var
         FormatAddress: Codeunit "Format Address";
         ShipToAddress: array[8] of Text[100];
