@@ -24,7 +24,6 @@ codeunit 50101 "PMIS Functions"
     begin
         if not ShopifyOrder.Get(RefundHeader."Order Id") then
             exit;
-
         if not FindSalesOrder(ShopifyOrder, SalesHeader) then
             exit;
         if SalesHeader.Status = SalesHeader.Status::Released then
@@ -36,14 +35,12 @@ codeunit 50101 "PMIS Functions"
         SalesLine.Reset();
         SalesLine.SetRange("Document Type", SalesHeader."Document Type");
         SalesLine.SetRange("Document No.", SalesHeader."No.");
-
         if SalesLine.FindSet() then
             repeat
                 SalesLine.Delete(true);
             until SalesLine.Next() = 0;
 
         SalesHeader.Delete(true);
-
     end;
 
     procedure FindSalesOrder(ShopifyOrder: Record "Shpfy Order Header"; var SalesHeader: Record "Sales Header"): Boolean
@@ -62,13 +59,11 @@ codeunit 50101 "PMIS Functions"
     begin
         SalesShipmentLine.Reset();
         SalesShipmentLine.SetRange("Order No.", SalesHeader."No.");
-
         if not SalesShipmentLine.IsEmpty() then
             exit(true);
 
         SalesInvoiceLine.Reset();
         SalesInvoiceLine.SetRange("Order No.", SalesHeader."No.");
-
         if not SalesInvoiceLine.IsEmpty() then
             exit(true);
 
@@ -89,7 +84,6 @@ codeunit 50101 "PMIS Functions"
             CurrentTemplateCode := FindItemTemplate(ShopifyProduct, ShopifyVariant)
         else
             CurrentTemplateCode := TemplateCode;
-
         if ShopifyVariant.SKU <> '' then
             case Shop."SKU Mapping" of
                 Shop."SKU Mapping"::"Item No.":
@@ -107,31 +101,26 @@ codeunit 50101 "PMIS Functions"
         Item.Description := ShopifyProduct.Title;
 
         CreateItemUnitOfMeasure(ShopifyVariant, Item);
-
         if ShopifyVariant."Unit Cost" <> 0 then
             if Shop."Currency Code" = '' then
                 Item.Validate("Unit Cost", ShopifyVariant."Unit Cost")
             else
                 Item.Validate("Unit Cost", Round(CurrencyExchangeRate.ExchangeAmtFCYToLCY(WorkDate(), Shop."Currency Code", ShopifyVariant."Unit Cost", CurrencyExchangeRate.ExchangeRate(WorkDate(), Shop."Currency Code"))));
-
         if ShopifyVariant.Price <> 0 then
             if Shop."Currency Code" = '' then
                 Item.Validate("Unit Price", ShopifyVariant.Price)
             else
                 Item.Validate("Unit Price", Round(CurrencyExchangeRate.ExchangeAmtFCYToLCY(WorkDate(), Shop."Currency Code", ShopifyVariant.Price, CurrencyExchangeRate.ExchangeRate(WorkDate(), Shop."Currency Code"))));
-
         if ShopifyProduct."Product Type" <> '' then begin
             ItemCategory.SetFilter(Description, CleanFilterValue(ShopifyProduct."Product Type", MaxStrLen(ItemCategory.Description)));
             if ItemCategory.FindFirst() then
                 Item."Item Category Code" := ItemCategory.Code;
         end;
-
         if ShopifyProduct.Vendor <> '' then begin
             Vendor.SetFilter(Name, CleanFilterValue(ShopifyProduct.Vendor, MaxStrLen(Vendor.Name)));
             if Vendor.FindFirst() then
                 Item."Vendor No." := Vendor."No.";
         end;
-
         if Shop."Sync Item Marketing Text" then
             CreateEntityText(ShopifyProduct, Item);
 
@@ -164,7 +153,6 @@ codeunit 50101 "PMIS Functions"
     begin
         if not ItemTempl.Get(ItemTemplCode) then
             exit;
-
         if ItemNo <> '' then
             Item."No." := ItemNo
         else
@@ -303,7 +291,6 @@ codeunit 50101 "PMIS Functions"
         ItemReference."Reference No." := ReferenceNo;
         if not ItemReference.Insert() then
             ItemReference.Modify();
-
         if VariantCode <> '' then begin
             ItemReference.SetRange("Item No.", ItemNo);
             ItemReference.SetRange("Variant Code", '');
@@ -338,14 +325,11 @@ codeunit 50101 "PMIS Functions"
     begin
         if ShopifyOrderHeader."Cancelled At" = 0DT then
             exit;
-
         if ShopifyOrderHeader."Sales Order No." = '' then
             exit;
-
         if not SalesHeader.Get(SalesHeader."Document Type"::Order, ShopifyOrderHeader."Sales Order No.")
         then
             exit;
-
         if HasPostedShipmentOrInvoice(SalesHeader) then
             exit;
 
@@ -373,4 +357,7 @@ codeunit 50101 "PMIS Functions"
 
         exit(false);
     end;
+
+
+
 }
